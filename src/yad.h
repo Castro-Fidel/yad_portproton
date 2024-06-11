@@ -248,7 +248,7 @@ typedef struct {
   guint text_width;
   GtkJustification text_align;
   gchar *dialog_image;
-  gboolean image_on_top;
+  gboolean start_gui;
   gchar *icon_theme;
   gchar *expander;
   gint borders;

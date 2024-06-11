@@ -327,38 +327,32 @@ create_layout (GtkWidget *dlg)
     imw = mw;
 
   /* create layout */
-  if (options.data.image_on_top)
+  layout = gtk_box_new (GTK_ORIENTATION_VERTICAL, 5);
+  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 5);
+  if (options.data.start_gui)
     {
-      layout = gtk_box_new (GTK_ORIENTATION_VERTICAL, 5);
-      box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 5);
-
-  if (image)
-    gtk_box_pack_start (GTK_BOX (box), image, FALSE, FALSE, 2);
-  if (text)
-    gtk_box_pack_start (GTK_BOX (box), text, TRUE, TRUE, 2);
-
-  gtk_box_pack_start (GTK_BOX (layout), box, FALSE, FALSE, 0);
-  if (imw)
-    {
-      if (options.mode == YAD_MODE_ENTRY)
-        gtk_box_pack_start (GTK_BOX (layout), imw, TRUE, FALSE, 0);
-      else
-        gtk_box_pack_start (GTK_BOX (layout), imw, TRUE, TRUE, 0);
-    }
+      if (text)
+        gtk_box_pack_start (GTK_BOX (layout), text, FALSE, FALSE, 2);
+      if (image)
+        gtk_box_pack_start (GTK_BOX (box), image, FALSE, FALSE, 2);
+        gtk_box_pack_start (GTK_BOX (layout), box, TRUE, TRUE, 0);
+      if (imw)
+        gtk_box_pack_start (GTK_BOX (box), imw, TRUE, TRUE, 0);
     }
   else
     {
-      layout = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 5);
-      box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 5);
-
-      if (text)
-        gtk_box_pack_start (GTK_BOX (box), text, FALSE, FALSE, 0);
-      if (imw)
-        gtk_box_pack_start (GTK_BOX (box), imw, TRUE, TRUE, 0);
-
       if (image)
-        gtk_box_pack_start (GTK_BOX (layout), image, FALSE, FALSE, 0);
-      gtk_box_pack_start (GTK_BOX (layout), box, TRUE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (box), image, FALSE, FALSE, 2);
+      if (text)
+        gtk_box_pack_start (GTK_BOX (box), text, TRUE, TRUE, 2);
+        gtk_box_pack_start (GTK_BOX (layout), box, FALSE, FALSE, 0);
+      if (imw)
+        {
+          if (options.mode == YAD_MODE_ENTRY)
+            gtk_box_pack_start (GTK_BOX (layout), imw, TRUE, FALSE, 0);
+          else
+            gtk_box_pack_start (GTK_BOX (layout), imw, TRUE, TRUE, 0);
+        }
     }
 
   if (options.mode == YAD_MODE_DND)
